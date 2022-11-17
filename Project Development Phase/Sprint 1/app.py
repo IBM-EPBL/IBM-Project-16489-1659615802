@@ -44,9 +44,9 @@ def loginpage():
    
 @app.route('/registration')
 def home():
-    return render_template('registeration.html')
+    return render_template('registration.html')
 
-@app.route('/registeration',methods=['GET', 'POST'])
+@app.route('/registration',methods=['GET', 'POST'])
 def register():
     msg = ''
     if request.method == 'POST' :
@@ -75,4 +75,10 @@ def register():
             msg = 'You have successfully registered !'
     elif request.method == 'POST':
         msg = 'Please fill out the form !'
-    return render_template('registeration.html', msg = msg)
+    return render_template('registration.html', msg = msg)
+@app.route('/logout')
+def logout():
+    session.pop('email', None)
+    return redirect(url_for('login'))
+if __name__ == "__main__":
+    app.run(debug=True)
